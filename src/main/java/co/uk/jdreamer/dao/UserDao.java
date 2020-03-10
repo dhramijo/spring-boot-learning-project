@@ -3,18 +3,19 @@ package co.uk.jdreamer.dao;
 import co.uk.jdreamer.model.User;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface UserDao {
 
-    List<User> getAllUsers();
+    List<User> selectAllUsers();
 
-    User getUser(UUID userId);
+    Optional<User> selectUserByUserUid(UUID userId);
 
-    int insertUser(User user);
+    int insertUser(UUID uuid, User user);
 
     int updateUser(User user);
 
-    int deleteUser(UUID userId);
+    int deleteUserByUserUid(UUID userId);
 
 }

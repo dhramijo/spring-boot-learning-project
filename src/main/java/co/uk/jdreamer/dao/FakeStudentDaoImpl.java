@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository("fakeDao")
+@Repository("fakeStudentDao")
 public class FakeStudentDaoImpl implements StudentDao {
 
     private final Map<UUID, Student> database;
@@ -20,9 +20,8 @@ public class FakeStudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public int insertNewStudent(UUID studentId, Student student) {
-        database.put(studentId,student);
-        return 1;
+    public List<Student> selectAllStudents() {
+        return new ArrayList<>(database.values());
     }
 
     @Override
@@ -31,8 +30,9 @@ public class FakeStudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public List<Student> selectAllStudents() {
-        return new ArrayList<>(database.values());
+    public int insertNewStudent(UUID studentId, Student student) {
+        database.put(studentId,student);
+        return 1;
     }
 
     @Override

@@ -30,6 +30,10 @@ public class User {
         return userUid;
     }
 
+    public void setUserUid(UUID userUid) {
+        this.userUid = userUid;
+    }
+
     public String getFirstName() {
         return firstName;
     }

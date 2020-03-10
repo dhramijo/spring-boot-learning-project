@@ -1,5 +1,6 @@
 package co.uk.jdreamer.service;
 
+
 import co.uk.jdreamer.dao.StudentDao;
 import co.uk.jdreamer.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,11 @@ import java.util.UUID;
 @Service
 public class StudentService {
 
+
     private final StudentDao studentDao;
 
-    @Autowired // @Qualifier("fakeDao") refer to @Repository("fakeDao") in FakeStudentDaoImpl
-    public StudentService(@Qualifier("fakeDao") StudentDao studentDao) {
+    @Autowired // @Qualifier("fakeStudentDao") refer to @Repository("fakeDao") in FakeStudentDaoImpl
+    public StudentService(@Qualifier("fakeStudentDao") StudentDao studentDao) {
         this.studentDao = studentDao;
     }
 

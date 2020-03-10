@@ -1,9 +1,9 @@
 package co.uk.jdreamer.dao;
 
-        import co.uk.jdreamer.model.Student;
+import co.uk.jdreamer.model.Student;
 
-        import java.util.List;
-        import java.util.UUID;
+import java.util.List;
+import java.util.UUID;
 
 public interface StudentDao {
 

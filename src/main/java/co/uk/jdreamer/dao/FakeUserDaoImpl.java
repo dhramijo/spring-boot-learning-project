@@ -3,10 +3,7 @@ package co.uk.jdreamer.dao;
 import co.uk.jdreamer.model.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Repository("fakeUserDao")
 public class FakeUserDaoImpl implements UserDao {
@@ -24,27 +21,30 @@ public class FakeUserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return null;
+    public List<User> selectAllUsers() {
+        return new ArrayList<>(database.values());
     }
 
     @Override
-    public User getUser(UUID userId) {
-        return null;
+    public Optional<User> selectUserByUserUid(UUID userId) {
+        return Optional.ofNullable(database.get(userId)); // Check if userId is null
     }
 
     @Override
-    public int insertUser(User user) {
-        return 0;
+    public int insertUser(UUID uuid, User user) {
+        database.put(user.getUserUid(),user);
+        return 1;
     }
 
     @Override
     public int updateUser(User user) {
-        return 0;
+        database.put(user.getUserUid(),user);
+        return 1;
     }
 
     @Override
-    public int deleteUser(UUID userId) {
-        return 0;
+    public int deleteUserByUserUid(UUID userId) {
+        database.remove(userId);
+        return 1;
     }
 }
