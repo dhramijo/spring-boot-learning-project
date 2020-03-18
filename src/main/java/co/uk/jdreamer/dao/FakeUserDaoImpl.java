@@ -15,8 +15,13 @@ public class FakeUserDaoImpl implements UserDao {
         UUID userId = UUID.randomUUID();
         database.put(
                 userId,
-                new User(userId,"Jo", "Dreamer", User.GENDER.MALE,
-                        22,"jdreamer@gmail.com")
+                new User(
+                        userId,
+                        "Jo",
+                        "Dreamer",
+                        User.GENDER.MALE,
+                        22,
+                        "jdreamer@gmail.com")
         );
     }
 
