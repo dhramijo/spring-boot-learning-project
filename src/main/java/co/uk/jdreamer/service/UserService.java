@@ -28,8 +28,8 @@ public class UserService {
         return userDao.selectUserByUserUid(userId);
     }
 
-    public int insertUser(User user) {
-        return userDao.insertUser(UUID.randomUUID(), user);
+    public void insertUser(User user) {
+        userDao.insertUser(UUID.randomUUID(), user);
     }
 
     public int updateStudentById(User user) {

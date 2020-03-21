@@ -21,7 +21,9 @@ class FakeUserDaoImplTest {
 
     @Test
     void test_shouldSelectAllUsers() {
+
         List<User> users = fakeUserDao.selectAllUsers();
+
         assertThat(users).hasSize(1);
 
         User user = users.get(0);
@@ -37,14 +39,17 @@ class FakeUserDaoImplTest {
 
     @Test
     void test_shouldSelectUserByUserUid() {
+
         UUID annaUid = UUID.randomUUID();
         User anna = new User(annaUid,"anna","montana",
                 User.GENDER.FEMALE,30,"anna@gmail.com");
 
         fakeUserDao.insertUser(annaUid,anna);
+
         assertThat(fakeUserDao.selectAllUsers()).hasSize(2);
 
         Optional<User> annaOptional = fakeUserDao.selectUserByUserUid(annaUid);
+
         assertThat(annaOptional.isPresent()).isTrue();
         assertThat(annaOptional.get()).isEqualToComparingFieldByField(anna);
     }
@@ -52,19 +57,48 @@ class FakeUserDaoImplTest {
     @Test
     void test_shouldNotSelectUserByRandomUserUid() {
         UUID randomUUID = UUID.randomUUID();
+
         Optional<User> user = fakeUserDao.selectUserByUserUid(randomUUID);
+
         assertThat(user.isPresent()).isFalse();
     }
 
     @Test
     void test_shouldInsertUser() {
+
+        UUID userUid = UUID.randomUUID();
+        User user = new User(userUid,"anna","montana",
+                User.GENDER.FEMALE,30,"anna@gmail.com");
+
+        fakeUserDao.insertUser(user.getUserUid(),user);
+
+        List<User> users = fakeUserDao.selectAllUsers();
+
+        assertThat(users).hasSize(2);
+        assertThat(fakeUserDao.selectUserByUserUid(userUid).get()).isEqualToComparingFieldByField(user);
     }
 
     @Test
     void test_shouldUpdateUser() {
+
+        UUID joeUserUid = fakeUserDao.selectAllUsers().get(0).getUserUid();
+        User newJoe = new User(joeUserUid,"anna","montana",
+                User.GENDER.FEMALE,30,"anna@gmail.com");
+
+        fakeUserDao.updateUser(newJoe);
+        Optional<User> optionalNewJoe = fakeUserDao.selectUserByUserUid(joeUserUid);
+
+        assertThat(optionalNewJoe.isPresent()).isTrue();
+        assertThat(fakeUserDao.selectAllUsers()).hasSize(1);
+        assertThat(optionalNewJoe.get()).isEqualToComparingFieldByField(newJoe);
     }
 
     @Test
     void test_shouldDeleteUserByUserUid() {
+        UUID joeUserUid = fakeUserDao.selectAllUsers().get(0).getUserUid();
+        fakeUserDao.deleteUserByUserUid(joeUserUid);
+
+        assertThat(fakeUserDao.selectUserByUserUid(joeUserUid).isPresent()).isFalse();
+        assertThat(fakeUserDao.selectAllUsers()).isEmpty();
     }
 }

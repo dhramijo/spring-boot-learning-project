@@ -10,7 +10,7 @@ public class FakeUserDaoImpl implements UserDao {
 
     private static Map<UUID, User> database;
 
-    static {
+    public FakeUserDaoImpl () {
         database = new HashMap<UUID, User>();
         UUID userId = UUID.randomUUID();
         database.put(
@@ -36,9 +36,8 @@ public class FakeUserDaoImpl implements UserDao {
     }
 
     @Override
-    public int insertUser(UUID uuid, User user) {
+    public void insertUser(UUID uuid, User user) {
         database.put(user.getUserUid(),user);
-        return 1;
     }
 
     @Override
