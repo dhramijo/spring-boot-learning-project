@@ -36,8 +36,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int insertUser(User user) {
-        database.put(user.getUserUid(), user);
+    public int insertUser(UUID userUId, User user) {
+        database.put(userUId, user);
         return 1;
     }
 

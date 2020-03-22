@@ -2,25 +2,32 @@ package co.uk.jdreamer.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class User {
 
-    private UUID userUid;
-    private String firstName;
-    private String lastName;
-    private GENDER gender;
-    private Integer age;
-    private String email;
+    private final UUID userUid;
+    private final String firstName;
+    private final String lastName;
+    private final GENDER gender;
+    private final Integer age;
+    private final String email;
 
     public enum GENDER {
         MALE,FEMALE
     }
 
-    public User() {
-    }
-
-    public User(UUID userUid, String firstName, String lastName, GENDER gender, Integer age, String email) {
+    /* @JsonProperty to define the property name to send to the server
+       @JsonIgnore, to hide property to the client
+    * */
+    public User(
+            @JsonProperty("userUid") UUID userUid,
+            @JsonProperty("firstName") String firstName,
+            @JsonProperty("lastName") String lastName,
+            @JsonProperty("gender") GENDER gender,
+            @JsonProperty("age") Integer age,
+            @JsonProperty("email") String email) {
         this.userUid = userUid;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,12 +36,9 @@ public class User {
         this.email = email;
     }
 
+    @JsonProperty("id")
     public UUID getUserUid() {
         return userUid;
-    }
-
-    public void setUserUid(UUID userUid) {
-        this.userUid = userUid;
     }
 
     public String getFirstName() {
@@ -55,6 +59,22 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    /* Computed JSON properties
+       Additional custom properties added to the JSON structure
+    */
+    public String getFullName() {
+        return firstName + " " +lastName;
+    }
+
+    public int getDateOfBirth() {
+        return LocalDate.now().minusYears(age).getYear();
+    }
+
+    public static User newUser(UUID userUid, User user) {
+        return new User(userUid, user.getFirstName(), user.getLastName(),
+                user.getGender(), user.getAge(), user.getEmail());
     }
 
     @Override

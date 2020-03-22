@@ -44,7 +44,7 @@ class UserDaoImplTest {
         User anna = new User(annaUid,"anna","montana",
                 User.GENDER.FEMALE,30,"anna@gmail.com");
 
-        fakeUserDao.insertUser(anna);
+        fakeUserDao.insertUser(annaUid,anna);
 
         assertThat(fakeUserDao.selectAllUsers()).hasSize(2);
 
@@ -70,7 +70,7 @@ class UserDaoImplTest {
         User user = new User(userUid,"anna","montana",
                 User.GENDER.FEMALE,30,"anna@gmail.com");
 
-        fakeUserDao.insertUser(user);
+        fakeUserDao.insertUser(userUid,user);
 
         List<User> users = fakeUserDao.selectAllUsers();
 

@@ -118,11 +118,11 @@ class UserServiceTest {
         User anna = new User(null,"anna","montana",
                 User.GENDER.FEMALE,30,"anna@gmail.com");
 
-        given(fakeUserDao.insertUser(anna)).willReturn(1);
+        given(fakeUserDao.insertUser(any(UUID.class), eq(anna))).willReturn(1);
 
         int insertResult = userService.insertUser(anna);
 
-        verify(fakeUserDao, times(1)).insertUser(captor.capture());
+        verify(fakeUserDao, times(1)).insertUser(any(UUID.class),captor.capture());
 
         assertEquals(captor.getValue().getLastName(), "montana");
 
