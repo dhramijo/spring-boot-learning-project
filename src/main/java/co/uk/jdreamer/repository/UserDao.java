@@ -1,4 +1,4 @@
-package co.uk.jdreamer.dao;
+package co.uk.jdreamer.repository;
 
 import co.uk.jdreamer.model.User;
 
@@ -12,7 +12,7 @@ public interface UserDao {
 
     Optional<User> selectUserByUserUid(UUID userId);
 
-    void insertUser(UUID uuid, User user);
+    void insertUser(User user);
 
     int updateUser(User user);
 

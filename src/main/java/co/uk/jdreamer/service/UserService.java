@@ -1,6 +1,6 @@
 package co.uk.jdreamer.service;
 
-import co.uk.jdreamer.dao.UserDao;
+import co.uk.jdreamer.repository.UserDao;
 import co.uk.jdreamer.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,11 +16,11 @@ public class UserService {
     private final UserDao userDao;
 
     @Autowired // @Qualifier("fakeStudentDao") refer to @Repository("fakeDao") in FakeStudentDaoImpl
-    public UserService(@Qualifier("fakeUserDao") UserDao userDao) {
+    public UserService(@Qualifier("userDao") UserDao userDao) {
         this.userDao = userDao;
     }
 
-    public List<User> getAllStudents() {
+    public List<User> getAllUsers() {
         return userDao.selectAllUsers();
     }
 
@@ -29,21 +29,23 @@ public class UserService {
     }
 
     public void insertUser(User user) {
-        userDao.insertUser(UUID.randomUUID(), user);
+        UUID userUid = UUID.randomUUID();
+        user.setUserUid(userUid);
+        userDao.insertUser(user);
     }
 
-    public int updateStudentById(User user) {
+    public int updateUser(User user) {
         Optional<User> optionalUser = getUserById(user.getUserUid());
         if (optionalUser.isPresent()) {
-            userDao.updateUser(user);
+            return userDao.updateUser(user);
         }
         return -1;
     }
 
-    public int deleteStudentById(UUID userId) {
+    public int deleteUserById(UUID userId) {
         Optional<User> optionalUser = getUserById(userId);
         if (optionalUser.isPresent()) {
-            userDao.deleteUserByUserUid(userId);
+            return userDao.deleteUserByUserUid(userId);
         }
         return -1;
     }

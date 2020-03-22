@@ -1,4 +1,4 @@
-package co.uk.jdreamer.dao;
+package co.uk.jdreamer.repository;
 
 import co.uk.jdreamer.model.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,13 +10,13 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class FakeUserDaoImplTest {
+class UserDaoImplTest {
 
-    private FakeUserDaoImpl fakeUserDao;
+    private UserDaoImpl fakeUserDao;
 
     @BeforeEach
     void setUp() {
-        fakeUserDao = new FakeUserDaoImpl();
+        fakeUserDao = new UserDaoImpl();
     }
 
     @Test
@@ -44,7 +44,7 @@ class FakeUserDaoImplTest {
         User anna = new User(annaUid,"anna","montana",
                 User.GENDER.FEMALE,30,"anna@gmail.com");
 
-        fakeUserDao.insertUser(annaUid,anna);
+        fakeUserDao.insertUser(anna);
 
         assertThat(fakeUserDao.selectAllUsers()).hasSize(2);
 
@@ -70,7 +70,7 @@ class FakeUserDaoImplTest {
         User user = new User(userUid,"anna","montana",
                 User.GENDER.FEMALE,30,"anna@gmail.com");
 
-        fakeUserDao.insertUser(user.getUserUid(),user);
+        fakeUserDao.insertUser(user);
 
         List<User> users = fakeUserDao.selectAllUsers();
 

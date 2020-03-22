@@ -1,16 +1,16 @@
-package co.uk.jdreamer.dao;
+package co.uk.jdreamer.repository;
 
 import co.uk.jdreamer.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository("fakeUserDao")
-public class FakeUserDaoImpl implements UserDao {
+@Repository("userDao")
+public class UserDaoImpl implements UserDao {
 
     private static Map<UUID, User> database;
 
-    public FakeUserDaoImpl () {
+    public UserDaoImpl() {
         database = new HashMap<UUID, User>();
         UUID userId = UUID.randomUUID();
         database.put(
@@ -36,7 +36,7 @@ public class FakeUserDaoImpl implements UserDao {
     }
 
     @Override
-    public void insertUser(UUID uuid, User user) {
+    public void insertUser(User user) {
         database.put(user.getUserUid(),user);
     }
 

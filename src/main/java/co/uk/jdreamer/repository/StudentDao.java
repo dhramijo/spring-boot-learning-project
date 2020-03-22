@@ -1,4 +1,4 @@
-package co.uk.jdreamer.dao;
+package co.uk.jdreamer.repository;
 
 import co.uk.jdreamer.model.Student;
 
