@@ -8,6 +8,4 @@ import javax.ws.rs.core.Application;
 @Configuration
 @ApplicationPath("/")
 public class RestEasyConfig extends Application {
-
-
 }
