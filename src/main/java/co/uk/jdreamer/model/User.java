@@ -7,14 +7,17 @@ import java.util.UUID;
 public class User {
 
     private UUID userUid;
-    private final String firstName;
-    private final String lastName;
-    private final GENDER gender;
-    private final Integer age;
-    private final String email;
+    private String firstName;
+    private String lastName;
+    private GENDER gender;
+    private Integer age;
+    private String email;
 
     public enum GENDER {
         MALE,FEMALE
+    }
+
+    public User() {
     }
 
     public User(UUID userUid, String firstName, String lastName, GENDER gender, Integer age, String email) {

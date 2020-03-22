@@ -44,8 +44,8 @@ class UserServiceTest {
                 User.GENDER.FEMALE,30,"anna@gmail.com");
 
         ImmutableList<User> users = new ImmutableList.Builder<User>()
-            .add(anna)
-            .build();
+                .add(anna)
+                .build();
 
         // GIVEN mock the dao
         given(fakeUserDao.selectAllUsers()).willReturn(users);
@@ -83,15 +83,20 @@ class UserServiceTest {
         User anna = new User(null,"anna","montana",
                 User.GENDER.FEMALE,30,"anna@gmail.com");
 
-        // Dao call to void insertUser method
-        doNothing().when(fakeUserDao).insertUser(any(User.class));
+        given(fakeUserDao.insertUser(anna)).willReturn(1);
 
-        userService.insertUser(anna);
+        int insertResult = userService.insertUser(anna);
 
         verify(fakeUserDao, times(1)).insertUser(captor.capture());
 
-        // captor.getValue() gives the user
         assertEquals(captor.getValue().getLastName(), "montana");
+
+        /* Test per void insert method
+
+        // Dao call to void insertUser method instead of given(fakeUserDao.insertUser(anna)).willReturn(1);
+        doNothing().when(fakeUserDao).insertUser(any(User.class));
+
+         */
 
     }
 

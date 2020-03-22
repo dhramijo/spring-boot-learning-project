@@ -7,10 +7,10 @@ import java.util.UUID;
 public class Student {
 
     private UUID id;
-    private final Integer age;
-    private final String firstName;
-    private final String lastName;
-    private final String course;
+    private Integer age;
+    private String firstName;
+    private String lastName;
+    private String course;
 
     public Student(
         @JsonProperty("id") UUID id,
@@ -23,6 +23,9 @@ public class Student {
         this.firstName = firstName;
         this.lastName = lastName;
         this.course = course;
+    }
+
+    public Student() {
     }
 
     public UUID getId() {

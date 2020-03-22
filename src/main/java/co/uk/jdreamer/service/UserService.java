@@ -28,10 +28,10 @@ public class UserService {
         return userDao.selectUserByUserUid(userId);
     }
 
-    public void insertUser(User user) {
+    public int insertUser(User user) {
         UUID userUid = UUID.randomUUID();
         user.setUserUid(userUid);
-        userDao.insertUser(user);
+       return userDao.insertUser(user);
     }
 
     public int updateUser(User user) {
