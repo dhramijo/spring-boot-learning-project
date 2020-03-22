@@ -50,7 +50,7 @@ class UserServiceTest {
         // GIVEN mock the dao
         given(fakeUserDao.selectAllUsers()).willReturn(users);
 
-        List<User> allUsers = userService.getAllUsers();
+        List<User> allUsers = userService.getAllUsers(Optional.empty());
 
         User user = allUsers.get(0);
 

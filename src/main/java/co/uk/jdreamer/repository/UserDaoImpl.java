@@ -37,18 +37,15 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int insertUser(User user) {
-        Optional<User> optionalUser = selectUserByUserUid(user.getUserUid());
-        if (optionalUser.isPresent()) {
-            database.put(user.getUserUid(), user);
-            return 1;
-        }
-        return -1;
+        database.put(user.getUserUid(), user);
+        return 1;
     }
 
     @Override
     public int updateUser(User user) {
         database.put(user.getUserUid(),user);
         return 1;
+
     }
 
     @Override
