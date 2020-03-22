@@ -10,6 +10,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.*;
 import org.mockito.MockitoAnnotations;
@@ -37,7 +38,7 @@ class UserServiceTest {
     }
 
     @Test
-    void  test_shouldGetAllStudents() {
+    void  test_shouldGetAllUsers() {
 
         UUID annaUid = UUID.randomUUID();
         User anna = new User(annaUid,"anna","montana",
@@ -62,6 +63,40 @@ class UserServiceTest {
         assertThat(user.getAge()).isEqualTo(30);
         assertThat(user.getEmail()).isEqualTo("anna@gmail.com");
 
+    }
+
+    @Test
+    void  test_shouldGetAllUsersByGender() {
+        UUID annaUid = UUID.randomUUID();
+        User anna = new User(annaUid,"anna","montana",
+                User.GENDER.FEMALE,30,"anna@gmail.com");
+
+        UUID johnUid = UUID.randomUUID();
+        User john = new User(johnUid,"john","rossi",
+                User.GENDER.MALE,22,"jrossi@gmail.com");
+
+        ImmutableList<User> users = new ImmutableList.Builder<User>()
+                .add(anna)
+                .add(john)
+                .build();
+
+        given(fakeUserDao.selectAllUsers()).willReturn(users);
+
+        List<User> filteredUsers = userService.getAllUsers(Optional.of("female"));
+
+        User userAnna = filteredUsers.get(0);
+
+        assertThat(filteredUsers).hasSize(1);
+        assertThat(userAnna.getUserUid()).isNotNull();
+        assertThat(userAnna.getFirstName()).isEqualTo("anna");
+
+    }
+
+    @Test
+    void test_shouldThrowExceptionWhenGenderIsInvalid() {
+        assertThatThrownBy(() -> userService.getAllUsers(Optional.of("not valid gender")))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessageContaining("Invalid gender");
     }
 
     @Test
