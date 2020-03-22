@@ -2,7 +2,7 @@ package co.uk.jdreamer.utils;
 
 public class ErrorMessage {
 
-    String errorMessage;
+    private final String errorMessage;
 
     public ErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
@@ -12,7 +12,4 @@ public class ErrorMessage {
         return errorMessage;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
 }
