@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -50,15 +51,14 @@ public class UserService {
         if (optionalUser.isPresent()) {
             return userDao.updateUser(user);
         }
-        return -1;
+        throw new NotFoundException("User: " + user.getUserUid() + " not found");
     }
 
-    public int deleteUserById(UUID userId) {
-        Optional<User> optionalUser = getUserById(userId);
-        if (optionalUser.isPresent()) {
-            return userDao.deleteUserByUserUid(userId);
-        }
-        return -1;
+    public int deleteUserById(UUID uId) {
+        UUID userUid = getUserById(uId)
+                .map(User::getUserUid)
+                .orElseThrow(() -> new NotFoundException("User: " + uId + " not found"));;
+            return userDao.deleteUserByUserUid(userUid);
     }
 
 }
