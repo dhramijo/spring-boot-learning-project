@@ -7,13 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.ws.rs.QueryParam;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+//@Validated
 //@RestController
 //@RequestMapping("api/v1/users")
 public class UserController {
@@ -51,7 +54,7 @@ public class UserController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Integer> insertUser(@RequestBody User newUser) {
+    public ResponseEntity<Integer> insertUser(@Valid @RequestBody User newUser) {
         int result = userService.insertUser(newUser);
         return getIntegerResponseEntity(result);
     }
@@ -61,7 +64,7 @@ public class UserController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Integer> updateUser(@RequestBody User newUser) {
+    public ResponseEntity<Integer> updateUser(@Valid @RequestBody User newUser) {
         int result = userService.updateUser(newUser);
         return getIntegerResponseEntity(result);
     }

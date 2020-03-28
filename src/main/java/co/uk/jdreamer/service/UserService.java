@@ -1,7 +1,7 @@
 package co.uk.jdreamer.service;
 
-import co.uk.jdreamer.repository.UserDao;
 import co.uk.jdreamer.model.User;
+import co.uk.jdreamer.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

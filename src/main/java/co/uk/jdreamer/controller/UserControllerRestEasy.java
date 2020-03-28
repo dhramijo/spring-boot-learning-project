@@ -5,7 +5,9 @@ import co.uk.jdreamer.service.UserService;
 import co.uk.jdreamer.utils.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.UUID;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
+@Validated
 @Component
 @Path("api/v1/users")
 public class UserControllerRestEasy {
@@ -47,7 +50,7 @@ public class UserControllerRestEasy {
 
     @POST
     @Consumes(APPLICATION_JSON)
-    public Response insertUser(User newUser) {
+    public Response insertUser(@Valid User newUser) {
         int result = userService.insertUser(newUser);
         return getIntegerResponseEntity(result);
     }
@@ -55,7 +58,7 @@ public class UserControllerRestEasy {
     @PUT
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response updateUser(User newUser) {
+    public Response updateUser(@Valid User newUser) {
         int result = userService.updateUser(newUser);
         return getIntegerResponseEntity(result);
     }
