@@ -1,10 +1,12 @@
 package co.uk.jdreamer.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     private final UUID userUid;
@@ -18,9 +20,6 @@ public class User {
         MALE,FEMALE
     }
 
-    /* @JsonProperty to define the property name to send to the server
-       @JsonIgnore, to hide property to the client
-    * */
     public User(
             @JsonProperty("userUid") UUID userUid,
             @JsonProperty("firstName") String firstName,
@@ -36,11 +35,12 @@ public class User {
         this.email = email;
     }
 
-    @JsonProperty("id")
+    // @JsonProperty("id") @JsonProperty to define the property name to send to the server
     public UUID getUserUid() {
         return userUid;
     }
 
+    // @JsonIgnore, to hide property to the client
     public String getFirstName() {
         return firstName;
     }
