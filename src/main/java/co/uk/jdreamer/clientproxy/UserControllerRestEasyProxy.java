@@ -18,20 +18,20 @@ public interface UserControllerRestEasyProxy {
     @GET
     @Produces(APPLICATION_JSON)
     @Path("{userId}")
-    Response fetchUserById(@PathParam("userId") UUID userId);
+    User fetchUserById(@PathParam("userId") UUID userId);
 
     @POST
     @Consumes(APPLICATION_JSON)
-    Response insertUser(User newUser);
+    void insertUser(User newUser);
 
     @PUT
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    Response updateUser(User newUser);
+    void updateUser(User newUser);
 
     @DELETE
     @Produces(APPLICATION_JSON)
     @Path("{userId}")
-    Response deleteUser(@PathParam("userId") UUID userId);
+    void deleteUser(@PathParam("userId") UUID userId);
 
 }
