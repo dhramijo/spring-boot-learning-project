@@ -16,8 +16,8 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<rest.easy.client.version>4.6.0.Final</rest.easy.client.version>
-		<paypal.rest.easy.client.version>4.5.0.Final</paypal.rest.easy.client.version>
+		<rest.easy.client.version>5.0.0.Final</rest.easy.client.version>
+		<paypal.rest.easy.client.version>5.0.0.Final</paypal.rest.easy.client.version>
 		<jersey.guava.version>2.6</jersey.guava.version>
 	</properties>
 
